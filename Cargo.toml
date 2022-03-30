@@ -6,4 +6,12 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+gloo-console = "0.2"
 yew = "0.19"
+
+[dependencies.web-sys]
+version = "0.3"
+# Maybe needed for get_bounding_client_rect
+features = [
+  "DomRect",
+]
