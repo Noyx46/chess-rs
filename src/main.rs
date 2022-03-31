@@ -1,5 +1,4 @@
 use gloo_console::log;
-use gloo_utils;
 use web_sys::HtmlElement;
 use yew::prelude::*;
 
