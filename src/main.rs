@@ -45,6 +45,7 @@ impl Component for App {
                     .unwrap();
                 let tile_size = style.get_property_value("--c-tile-size").unwrap();
                 log!("Right click", x, y, "; tile size: ", tile_size);
+                // TODO: make highlights
                 false
             }
         }
