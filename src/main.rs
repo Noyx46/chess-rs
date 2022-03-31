@@ -1,4 +1,5 @@
 use gloo_console::log;
+use gloo_utils;
 use web_sys::HtmlElement;
 use yew::prelude::*;
 
@@ -16,7 +17,7 @@ struct App {
     /// The chess board will be stored in an array, with the
     /// first 8 elements composing the first row, the second
     /// 8 elements composing the second row, etc.
-    board: [u8; BOARD_SIZE * BOARD_SIZE],
+    _board: [u8; BOARD_SIZE * BOARD_SIZE],
 
     /// A NodeRef to the board in the HTML DOM so the board
     /// can pass back mouse coordinates
@@ -29,7 +30,7 @@ impl Component for App {
 
     fn create(_ctx: &Context<Self>) -> Self {
         App {
-            board: [0; 64],
+            _board: [0; 64],
             board_html: NodeRef::default(),
         }
     }
@@ -37,7 +38,14 @@ impl Component for App {
     fn update(&mut self, _ctx: &Context<Self>, msg: Self::Message) -> bool {
         match msg {
             Msg::RightClick(x, y) => {
-                log!("Right click", x, y);
+                let style = gloo_utils::document()
+                    .default_view()
+                    .unwrap()
+                    .get_computed_style(&gloo_utils::body())
+                    .unwrap()
+                    .unwrap();
+                let tile_size = style.get_property_value("--c-tile-size").unwrap();
+                log!("Right click", x, y, "; tile size: ", tile_size);
                 false
             }
         }
