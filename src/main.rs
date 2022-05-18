@@ -2,6 +2,8 @@ use gloo_console::log;
 use web_sys::HtmlElement;
 use yew::prelude::*;
 
+mod game;
+
 const BOARD_SIZE: usize = 8;
 
 enum Msg {
@@ -36,6 +38,7 @@ impl Component for App {
 
     fn update(&mut self, _ctx: &Context<Self>, msg: Self::Message) -> bool {
         match msg {
+            // TODO: use document().querySelector(".c-tile") instead
             Msg::RightClick(x, y) => {
                 let style = gloo_utils::document()
                     .default_view()
